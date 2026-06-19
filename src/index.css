@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+:root {
+  --bg-base: #030014; 
+  --grid-line: rgba(255, 255, 255, 0.10); 
+}
+
+body {
+  background-color: var(--bg-base);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .grid-mask {
+    /* Fades the grid outward from the center for that sleek spotlight effect */
+    mask-image: radial-gradient(circle at center, black 10%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black 10%, transparent 80%);
+  }
+}
