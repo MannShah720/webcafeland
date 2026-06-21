@@ -1,9 +1,27 @@
 import { ExternalLink } from 'lucide-react';
+import { 
+  SiReact, SiThreedotjs, SiVite, SiNextdotjs, SiTailwindcss, 
+  SiTypescript, SiCloudinary, SiStripe, SiClerk, SiGsap 
+} from 'react-icons/si';
+
 import ambientFlare from '../assets/Ambient.jpg';
 import earthProject from '../assets/EarthProject.png';
 import yoomProject from '../assets/YoomProject.png';
 import AImageProject from '../assets/AImageProject.png';
 import phoneProject from '../assets/3DPhoneProject.png';
+
+const TechIconMap: { [key: string]: React.ReactNode } = {
+  "React": <SiReact className="w-4 h-4" />,
+  "Three.js": <SiThreedotjs className="w-4 h-4" />,
+  "Vite": <SiVite className="w-4 h-4" />,
+  "Next.js": <SiNextdotjs className="w-4 h-4" />,
+  "Tailwind CSS": <SiTailwindcss className="w-4 h-4" />,
+  "TypeScript": <SiTypescript className="w-4 h-4" />,
+  "Cloudinary": <SiCloudinary className="w-4 h-4" />,
+  "Stripe": <SiStripe className="w-4 h-4" />,
+  "Clerk": <SiClerk className="w-4 h-4" />,
+  "GSAP": <SiGsap className="w-4 h-4" />
+};
 
 const projects = [
   {
@@ -17,7 +35,7 @@ const projects = [
   {
     title: "Yoom - Video Conferencing App",
     description: "Simplify your video conferencing experience with Yoom. Experience a connect with friends and family.",
-    tech: ["Next.js", "Stream", "Clerk", "Tailwind CSS"],
+    tech: ["Next.js", "Clerk", "Tailwind CSS"],
     image: yoomProject,
     github: "https://github.com/MannShah720",
     live: "#"
@@ -57,9 +75,9 @@ const Projects = () => {
               {/* Project Image Container */}
               <div className="relative aspect-video overflow-hidden border-b border-white/10 bg-[#13162d]">
                 <img 
-                    src={ambientFlare}
-                    alt="Ambient Flare"
-                    className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen filter invert" 
+                  src={ambientFlare}
+                  alt="Ambient Flare"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen filter invert" 
                 />
                 <img 
                   src={project.image} 
@@ -101,25 +119,28 @@ const Projects = () => {
                   {project.description}
                 </p>
 
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tag) => (
-                    <span 
-                      key={tag}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20"
+                {/* Tech Stack Icons & Learn More */}
+                <div className="flex flex-wrap items-center gap-3 mb-6">
+                {project.tech.map((tag) => (
+                    <div 
+                    key={tag}
+                    title={tag}
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400"
                     >
-                      {tag}
-                    </span>
-                  ))}
+                    {TechIconMap[tag] || <span className="text-[10px]">?</span>}
+                    </div>
+                ))}
+
+                {/* Right-aligned Link */}
+                <a 
+                    href={project.live} 
+                    className="ml-auto inline-flex items-center text-sm font-bold text-white hover:text-indigo-400 transition-colors"
+                >
+                    Learn More 
+                    <span className="ml-2">→</span>
+                </a>
                 </div>
 
-                <a 
-                  href={project.live} 
-                  className="inline-flex items-center text-sm font-bold text-white hover:text-indigo-400 transition-colors"
-                >
-                  Learn More 
-                  <span className="ml-2">→</span>
-                </a>
               </div>
             </div>
           ))}
