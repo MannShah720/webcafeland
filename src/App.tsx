@@ -1,5 +1,7 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
 
 const App = () => {
   return (
@@ -20,6 +22,12 @@ const App = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-32 pb-10">
         <Hero />
       </div>
+
+      {/* Experience Section */}
+      <Experience />
+
+      {/* Projects Section */}
+      <Projects />
     </main>
   );
 };
