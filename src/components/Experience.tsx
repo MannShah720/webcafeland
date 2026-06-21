@@ -4,6 +4,30 @@ import {
   SiFirebase, SiPython, SiJavascript
 } from 'react-icons/si';
 
+// 1. Defined Interfaces
+interface WorkExperience {
+  company: string;
+  role: string;
+  period: string;
+  description: string[];
+  technologies: string[];
+  logo: string;
+}
+
+interface EducationExperience {
+  institution: string;
+  degree: string;
+  period: string;
+  description: string[];
+  technologies: string[];
+  logo: string;
+}
+
+// 2. Used to differentiate between Work and Education items
+const isWork = (item: WorkExperience | EducationExperience): item is WorkExperience => {
+  return (item as WorkExperience).role !== undefined;
+};
+
 const skillIcons: { [key: string]: React.ReactNode } = {
   "React": <SiReact className="w-8 h-8 text-sky-400" />,
   "TypeScript": <SiTypescript className="w-8 h-8 text-blue-500" />,
@@ -19,7 +43,8 @@ const skills = ["React", "TypeScript", "Tailwind", "Node.js", "Firebase", "Pytho
 const Experience = () => {
   const [activeTab, setActiveTab] = useState<'work' | 'education' | 'skills'>('work');
 
-  const workExperiences = [
+  // 3. Explicitly typed arrays
+  const workExperiences: WorkExperience[] = [
     {
       company: "Tech Company Name",
       role: "Full-Stack Developer Intern",
@@ -44,7 +69,7 @@ const Experience = () => {
     }
   ];
 
-  const educationExperiences = [
+  const educationExperiences: EducationExperience[] = [
     {
       institution: "University in London",
       degree: "BSc Computer Science",
@@ -77,7 +102,6 @@ const Experience = () => {
           Experience
         </h2>
 
-        {/* Updated Segmented Control with Tech Tab */}
         <div className="flex justify-center mb-12">
           <div className="p-1.5 bg-white/5 border border-white/10 rounded-2xl flex gap-1 backdrop-blur-sm">
             {(['work', 'education', 'skills'] as const).map((tab) => (
@@ -96,7 +120,6 @@ const Experience = () => {
           </div>
         </div>
 
-        {/* Content Area */}
         {activeTab === 'skills' ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 animate-in fade-in duration-500">
             {skills.map((skill) => (
@@ -124,14 +147,14 @@ const Experience = () => {
                     <div className="flex-grow">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
                         <h3 className="text-2xl font-bold text-white tracking-tight">
-                          {item.role || item.degree}
+                          {isWork(item) ? item.role : item.degree}
                         </h3>
                         <span className="text-sm text-gray-500 font-bold bg-white/5 px-3 py-1 rounded-full border border-white/5 md:whitespace-nowrap w-fit">
                           {item.period}
                         </span>
                       </div>
                       <p className="text-indigo-400 font-bold text-lg mb-6 tracking-wide uppercase text-sm opacity-80">
-                        {item.company || item.institution}
+                        {isWork(item) ? item.company : item.institution}
                       </p>
                       <ul className="space-y-4 mb-6">
                         {item.description.map((bullet, i) => (
