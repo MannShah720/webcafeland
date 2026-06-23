@@ -1,11 +1,13 @@
 import {ExternalLink} from 'lucide-react';
 import { 
   SiReact, SiThreedotjs, SiVite, SiNextdotjs, SiTailwindcss, 
-  SiTypescript, SiCloudinary, SiStripe, SiClerk, SiGsap, SiExpress, SiNodedotjs
+  SiTypescript, SiCloudinary, SiStripe, SiClerk, SiGsap, SiExpress, SiNodedotjs,
+  SiAngular, SiSpring, SiSpringboot, SiPostgresql, SiDocker
 } from 'react-icons/si';
+import { FaJava } from 'react-icons/fa6';
 
 import ambientFlare from '../assets/Ambient.jpg';
-import earthProject from '../assets/EarthProject.png';
+import knowticeProject from '../assets/Knowtice.png';
 import chefBotProject from '../assets/ChefBot.png';
 import tenziesProject from '../assets/Tenzies.png';
 import assembleProject from '../assets/Assemble.png';
@@ -22,15 +24,21 @@ const TechIconMap: {[key: string]: React.ReactNode} = {
   "Clerk": <SiClerk className="w-4 h-4" />,
   "GSAP": <SiGsap className="w-4 h-4" />,
   "Express": <SiExpress className="w-4 h-4" />,
-  "Node.js": <SiNodedotjs className="w-4 h-4" />
+  "Node.js": <SiNodedotjs className="w-4 h-4" />,
+  "Angular": <SiAngular className="w-4 h-4" />,
+  "Spring": <SiSpring className="w-4 h-4" />,
+  "Springboot": <SiSpringboot className="w-4 h-4" />,
+  "PostgreSQL": <SiPostgresql className="w-4 h-4" />,
+  "Docker": <SiDocker className="w-4 h-4" />,
+  "Java": <FaJava className="w-4 h-4" />
 };
 
 const projects = [
   {
-    title: "3D Solar System",
-    description: "Explore the wonders of our solar system with this captivating 3D visualization of the planets using Three.js.",
-    tech: ["React", "Three.js", "Vite"],
-    image: earthProject,
+    title: "Knowtice",
+    description: "A social media platform for local communities organised by channels based on roads & towns.",
+    tech: ["Angular", "TypeScript", "Java", "PostgreSQL", "Docker", "Spring"],
+    image: knowticeProject,
     github: "https://github.com/MannShah720",
     live: "#"
   },
@@ -52,7 +60,7 @@ const projects = [
   },
   {
     title: "Assemble",
-    description: "Wordle clone with a tech twist",
+    description: "A tech twist on the classic Wordle puzzle, where the goal is to protect the programming languages from assembly.",
     tech: ["React"],
     image: assembleProject,
     github: "https://github.com/MannShah720/Assemble",
@@ -72,10 +80,10 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div 
               key={index}
-              className="group relative bg-white/[0.03] border border-white/10 rounded-3xl overflow-hidden hover:border-white/20 hover:bg-white/[0.05] transition-all duration-500"
+              className="group relative bg-white/[0.03] border border-white/10 rounded-3xl overflow-hidden hover:border-white/20 hover:shadow-2xl transition-all duration-500"
             >
               {/* Project Image Container */}
-              <div className="relative aspect-video overflow-hidden border-b border-white/10 bg-[#13162d] flex items-end justify-center">
+              <div className="relative aspect-video overflow-hidden bg-[#13162d] flex items-end justify-center">
                 <img 
                   src={ambientFlare}
                   alt="Ambient Flare"
@@ -93,7 +101,7 @@ const Projects = () => {
               </div>
 
               {/* Content */}
-              <div className="p-8">
+              <div className="p-8 bg-[#1C1C1E] relative z-20 border-t border-white/5">
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-2xl font-bold text-white group-hover:text-indigo-400 transition-colors">
                     {project.title}
@@ -125,26 +133,17 @@ const Projects = () => {
                   {project.description}
                 </p>
 
-                {/* Tech Stack Icons & Learn More */}
-                <div className="flex flex-wrap items-center gap-3 mb-6">
+                {/* Tech Stack Icons */}
+                <div className="flex flex-wrap items-center gap-3 mb-2">
                   {project.tech.map((tag) => (
                     <div 
                       key={tag}
                       title={tag}
-                      className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400"
+                      className="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400"
                     >
                       {TechIconMap[tag] || <span className="text-[10px]">?</span>}
                     </div>
                   ))}
-
-                  {/* Right-aligned Link */}
-                  <a 
-                    href={project.live} 
-                    className="ml-auto inline-flex items-center text-sm font-bold text-white hover:text-indigo-400 transition-colors"
-                  >
-                    Learn More 
-                    <span className="ml-2">→</span>
-                  </a>
                 </div>
               </div>
             </div>
