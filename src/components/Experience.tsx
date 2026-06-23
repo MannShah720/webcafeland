@@ -4,6 +4,9 @@ import {
   SiFirebase, SiPython, SiJavascript, SiFigma
 } from 'react-icons/si';
 
+import UoBLogo from '../assets/UoB.png';
+import StDomsLogo from '../assets/StDoms.png';
+
 // 1. Defined Interfaces
 interface WorkExperience {
   company: string;
@@ -44,7 +47,7 @@ const skills = ["React", "JavaScript", "TypeScript", "Tailwind", "Python", "Node
 const Experience = () => {
   const [activeTab, setActiveTab] = useState<'work' | 'education' | 'skills'>('work');
 
-  // 3. Explicitly typed arrays
+  // 3. Explicitly typed arrays with image paths
   const workExperiences: WorkExperience[] = [
     {
       company: "Tech Company Name",
@@ -55,7 +58,7 @@ const Experience = () => {
         "Integrated Firebase authentication and real-time database to manage user sessions."
       ],
       technologies: ["React", "Tailwind CSS", "Firebase", "TypeScript"],
-      logo: "🏢"
+      logo: "/logos/tech-company.png"
     },
     {
       company: "Freelance",
@@ -66,7 +69,7 @@ const Experience = () => {
         "Optimized web assets for maximum speed, accessibility, and SEO performance."
       ],
       technologies: ["JavaScript", "HTML/CSS", "Figma"],
-      logo: "💻"
+      logo: "/logos/freelance.png"
     }
   ];
 
@@ -79,8 +82,8 @@ const Experience = () => {
         "Grade: 1st Class (Year 1)",
         "Modules: Data Structures & Algorithms, Software Engineering, Artificial Intelligence, OOP in Java, Operating Systems, Databases & Web"
       ],
-      technologies: ["Java", "Python", "Git", "Figma"],
-      logo: "🎓"
+      technologies: ["Java", "Springboot", "Angular"],
+      logo: UoBLogo
     },
     {
       institution: "St Dominic's Sixth Form",
@@ -90,8 +93,8 @@ const Experience = () => {
         "Maths (A*), Computer Science (A*), Further Maths (A), Physics (A)",
         "Consistently achieved top percentiles and participated in national coding logic challenges."
       ],
-      technologies: ["Mathematics", "Algorithms", "Logic"],
-      logo: "🏫"
+      technologies: [],
+      logo: StDomsLogo
     }
   ];
 
@@ -142,8 +145,8 @@ const Experience = () => {
                 <div key={idx} className="relative pl-8 md:pl-10 group">
                   <div className="absolute w-3 h-3 bg-indigo-500 rounded-full -left-[6.5px] top-8 ring-4 ring-[#0a0a0a] group-hover:bg-indigo-400 transition-colors duration-200" />
                   <div className="flex flex-col md:flex-row gap-6 p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-white/20 hover:bg-white/[0.05] transition-all duration-500 shadow-sm">
-                    <div className="shrink-0 w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-3xl group-hover:scale-110 group-hover:border-indigo-500/50 transition-all duration-500 shadow-inner">
-                      {item.logo}
+                    <div className="shrink-0 w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:border-indigo-500/50 transition-all duration-500 shadow-inner overflow-hidden">
+                      <img src={item.logo} alt="Company Logo" className="w-10 h-10 object-contain" />
                     </div>
                     <div className="flex-grow">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">

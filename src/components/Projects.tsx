@@ -1,16 +1,16 @@
-import { ExternalLink } from 'lucide-react';
+import {ExternalLink} from 'lucide-react';
 import { 
   SiReact, SiThreedotjs, SiVite, SiNextdotjs, SiTailwindcss, 
-  SiTypescript, SiCloudinary, SiStripe, SiClerk, SiGsap 
+  SiTypescript, SiCloudinary, SiStripe, SiClerk, SiGsap, SiExpress, SiNodedotjs
 } from 'react-icons/si';
 
 import ambientFlare from '../assets/Ambient.jpg';
 import earthProject from '../assets/EarthProject.png';
-import yoomProject from '../assets/YoomProject.png';
-import AImageProject from '../assets/AImageProject.png';
-import phoneProject from '../assets/3DPhoneProject.png';
+import chefBotProject from '../assets/ChefBot.png';
+import tenziesProject from '../assets/Tenzies.png';
+import assembleProject from '../assets/Assemble.png';
 
-const TechIconMap: { [key: string]: React.ReactNode } = {
+const TechIconMap: {[key: string]: React.ReactNode} = {
   "React": <SiReact className="w-4 h-4" />,
   "Three.js": <SiThreedotjs className="w-4 h-4" />,
   "Vite": <SiVite className="w-4 h-4" />,
@@ -20,12 +20,14 @@ const TechIconMap: { [key: string]: React.ReactNode } = {
   "Cloudinary": <SiCloudinary className="w-4 h-4" />,
   "Stripe": <SiStripe className="w-4 h-4" />,
   "Clerk": <SiClerk className="w-4 h-4" />,
-  "GSAP": <SiGsap className="w-4 h-4" />
+  "GSAP": <SiGsap className="w-4 h-4" />,
+  "Express": <SiExpress className="w-4 h-4" />,
+  "Node.js": <SiNodedotjs className="w-4 h-4" />
 };
 
 const projects = [
   {
-    title: "3D Solar System Planets",
+    title: "3D Solar System",
     description: "Explore the wonders of our solar system with this captivating 3D visualization of the planets using Three.js.",
     tech: ["React", "Three.js", "Vite"],
     image: earthProject,
@@ -33,28 +35,28 @@ const projects = [
     live: "#"
   },
   {
-    title: "Yoom - Video Conferencing App",
-    description: "Simplify your video conferencing experience with Yoom. Experience a connect with friends and family.",
-    tech: ["Next.js", "Clerk", "Tailwind CSS"],
-    image: yoomProject,
-    github: "https://github.com/MannShah720",
+    title: "Chef Bot",
+    description: "An AI kitchen companion that generates custom recipes based on the ingredients you have on hand.",
+    tech: ["React", "Node.js", "Express"],
+    image: chefBotProject,
+    github: "https://github.com/MannShah720/Chef-Claude",
     live: "#"
   },
   {
-    title: "AI Image SaaS - Canva App",
-    description: "A Next.js software-as-a-service app with AI features and a payments system using Cloudinary and Stripe.",
-    tech: ["Next.js", "Cloudinary", "Stripe", "TypeScript"],
-    image: AImageProject,
-    github: "https://github.com/MannShah720",
-    live: "#"
+    title: "Tenzies",
+    description: "A fast-paced dice game where the goal is to roll all 10 dice to the same number as fast as possible.",
+    tech: ["React"],
+    image: tenziesProject,
+    github: "https://github.com/MannShah720/Tenzies",
+    live: "https://tenzies300.netlify.app/"
   },
   {
-    title: "Animated Apple iPhone 3D Website",
-    description: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D models.",
-    tech: ["React", "Three.js", "GSAP", "Tailwind CSS"],
-    image: phoneProject,
-    github: "https://github.com/MannShah720",
-    live: "#"
+    title: "Assemble",
+    description: "Wordle clone with a tech twist",
+    tech: ["React", "Node.js", "Express"],
+    image: assembleProject,
+    github: "https://github.com/MannShah720/Assemble",
+    live: "https://assemble10.netlify.app/"
   }
 ];
 
@@ -73,17 +75,21 @@ const Projects = () => {
               className="group relative bg-white/[0.03] border border-white/10 rounded-3xl overflow-hidden hover:border-white/20 hover:bg-white/[0.05] transition-all duration-500"
             >
               {/* Project Image Container */}
-              <div className="relative aspect-video overflow-hidden border-b border-white/10 bg-[#13162d]">
+              <div className="relative aspect-video overflow-hidden border-b border-white/10 bg-[#13162d] flex items-end justify-center">
                 <img 
                   src={ambientFlare}
                   alt="Ambient Flare"
                   className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen filter invert" 
                 />
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="relative z-10 w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                />
+                
+                {/* Mockup Frame Wrapper with 3D Tilt and Curved Border */}
+                <div className="w-[90%] h-[88%] translate-y-5 translate-x-1.5 -rotate-2 rounded-t-2xl border border-white/10 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] z-10 overflow-hidden group-hover:rotate-0 group-hover:translate-x-0 group-hover:translate-y-3 transition-all duration-500">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
               </div>
 
               {/* Content */}
@@ -121,26 +127,25 @@ const Projects = () => {
 
                 {/* Tech Stack Icons & Learn More */}
                 <div className="flex flex-wrap items-center gap-3 mb-6">
-                {project.tech.map((tag) => (
+                  {project.tech.map((tag) => (
                     <div 
-                    key={tag}
-                    title={tag}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400"
+                      key={tag}
+                      title={tag}
+                      className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400"
                     >
-                    {TechIconMap[tag] || <span className="text-[10px]">?</span>}
+                      {TechIconMap[tag] || <span className="text-[10px]">?</span>}
                     </div>
-                ))}
+                  ))}
 
-                {/* Right-aligned Link */}
-                <a 
+                  {/* Right-aligned Link */}
+                  <a 
                     href={project.live} 
                     className="ml-auto inline-flex items-center text-sm font-bold text-white hover:text-indigo-400 transition-colors"
-                >
+                  >
                     Learn More 
                     <span className="ml-2">→</span>
-                </a>
+                  </a>
                 </div>
-
               </div>
             </div>
           ))}
