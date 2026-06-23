@@ -45,7 +45,7 @@ const projects = [
   {
     title: "Tenzies",
     description: "A fast-paced dice game where the goal is to roll all 10 dice to the same number as fast as possible.",
-    tech: ["React"],
+    tech: ["React", "Node.js"],
     image: tenziesProject,
     github: "https://github.com/MannShah720/Tenzies",
     live: "https://tenzies300.netlify.app/"
@@ -53,7 +53,7 @@ const projects = [
   {
     title: "Assemble",
     description: "Wordle clone with a tech twist",
-    tech: ["React", "Node.js", "Express"],
+    tech: ["React"],
     image: assembleProject,
     github: "https://github.com/MannShah720/Assemble",
     live: "https://assemble10.netlify.app/"

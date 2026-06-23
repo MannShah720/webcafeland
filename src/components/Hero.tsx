@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import profilePic from '../assets/ProfilePic.jpg';
 
 const socialLinks = [
@@ -34,16 +33,6 @@ const socialLinks = [
 ];
 
 const Hero = () => {
-  const [copied, setCopied] = useState(false);
-
-  const handleEmailClick = () => {
-    navigator.clipboard.writeText("shahmann0108@gmail.com");
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
-  };
-
   return (
     <section id="about" className="flex flex-col-reverse md:flex-row items-center justify-center gap-12 md:gap-16 py-20 w-full">
       
@@ -61,32 +50,16 @@ const Hero = () => {
         {/* Social Icons & Resume Button Matrix */}
         <div className="flex items-center flex-wrap justify-center md:justify-start gap-4 mt-8">
           {socialLinks.map((link) => (
-            link.name === "Email" ? (
-              <button
-                key={link.name}
-                onClick={handleEmailClick}
-                className="relative w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 border border-white/20 text-gray-300 hover:text-white hover:bg-white/20 hover:border-white/30 transition-all duration-200 shadow-sm"
-                aria-label="Copy email address"
-              >
-                {link.icon}
-                {copied && (
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold px-2 py-1 rounded shadow-lg transition-opacity duration-200">
-                    Copied!
-                  </span>
-                )}
-              </button>
-            ) : (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 border border-white/20 text-gray-300 hover:text-white hover:bg-white/20 hover:border-white/30 transition-all duration-200 shadow-sm"
-                aria-label={link.name}
-              >
-                {link.icon}
-              </a>
-            )
+            <a
+              key={link.name}
+              href={link.href}
+              target={link.name === "Email" ? undefined : "_blank"}
+              rel={link.name === "Email" ? undefined : "noopener noreferrer"}
+              className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 border border-white/20 text-gray-300 hover:text-white hover:bg-white/20 hover:border-white/30 transition-all duration-200 shadow-sm"
+              aria-label={link.name}
+            >
+              {link.icon}
+            </a>
           ))}
 
           {/* Dedicated Resume Button */}
