@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { 
   SiReact, SiTypescript, SiTailwindcss, SiNodedotjs, 
-  SiFirebase, SiPython, SiJavascript
+  SiFirebase, SiPython, SiJavascript, SiFigma
 } from 'react-icons/si';
 
 // 1. Defined Interfaces
@@ -35,10 +35,11 @@ const skillIcons: { [key: string]: React.ReactNode } = {
   "Node.js": <SiNodedotjs className="w-8 h-8 text-green-500" />,
   "Firebase": <SiFirebase className="w-8 h-8 text-amber-500" />,
   "Python": <SiPython className="w-8 h-8 text-yellow-400" />,
-  "Javascript": <SiJavascript className="w-8 h-8 text-yellow-400" />
+  "JavaScript": <SiJavascript className="w-8 h-8 text-yellow-400" />,
+  "Figma": <SiFigma className="w-8 h-8 text-pink-500" />
 };
 
-const skills = ["React", "TypeScript", "Tailwind", "Node.js", "Firebase", "Python", "Javascript"];
+const skills = ["React", "JavaScript", "TypeScript", "Tailwind", "Python", "Node.js", "Firebase", "Figma"];
 
 const Experience = () => {
   const [activeTab, setActiveTab] = useState<'work' | 'education' | 'skills'>('work');
@@ -71,22 +72,22 @@ const Experience = () => {
 
   const educationExperiences: EducationExperience[] = [
     {
-      institution: "University in London",
+      institution: "University of Birmingham",
       degree: "BSc Computer Science",
-      period: "Sep 2023 - Present",
+      period: "Sep 2024 - Present",
       description: [
-        "Specializing in Software Engineering, UI/UX Design, and Data Structures.",
-        "Collaborated in an agile team of 5 to develop a full-stack web application for a university project."
+        "Grade: 1st Class (Year 1)",
+        "Modules: Data Structures & Algorithms, Software Engineering, Artificial Intelligence, OOP in Java, Operating Systems, Databases & Web"
       ],
       technologies: ["Java", "Python", "Git", "Figma"],
       logo: "🎓"
     },
     {
-      institution: "Previous College Name",
+      institution: "St Dominic's Sixth Form",
       degree: "A-Levels",
-      period: "Sep 2021 - Jun 2023",
+      period: "Sep 2022 - Jun 2024",
       description: [
-        "Studied Mathematics, Further Mathematics, and Computer Science.",
+        "Maths (A*), Computer Science (A*), Further Maths (A), Physics (A)",
         "Consistently achieved top percentiles and participated in national coding logic challenges."
       ],
       technologies: ["Mathematics", "Algorithms", "Logic"],
