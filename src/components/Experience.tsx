@@ -29,7 +29,7 @@ const isWork = (item: WorkExperience | EducationExperience): item is WorkExperie
   return (item as WorkExperience).role !== undefined;
 };
 
-const skillIcons:{[key:string]:React.ReactNode} = {
+const skillIcons: {[key: string]: React.ReactNode} = {
   "React": <SiReact className="w-8 h-8 text-sky-400" />,
   "TypeScript": <SiTypescript className="w-8 h-8 text-blue-500" />,
   "Tailwind": <SiTailwindcss className="w-8 h-8 text-teal-400" />,
@@ -99,20 +99,20 @@ const Experience = () => {
   return (
     <section id="experience" className="w-full py-20 px-4 flex flex-col items-center">
       <h2 className="text-4xl font-bold text-white mb-12 text-center tracking-tight">
-          Experience
+        Experience
       </h2>
       <div className="max-w-3xl w-full border border-white/10 rounded-xl bg-[#0d1117]/40 backdrop-blur-md overflow-hidden shadow-2xl">
-        
-        {/* Navigation Tabs Bar - Fixed State */}
+
+        {/* Navigation Tabs Bar */}
         <div className="flex w-full border-b border-white/10 bg-[#161b22]">
           {(['work', 'education', 'skills'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`flex-1 py-3 text-center text-sm font-semibold capitalize ${
-                activeTab === tab 
-                  ? 'bg-[#21262d] text-white border-b-2 border-indigo-500' 
-                  : 'text-gray-400'
+              className={`flex-1 py-3 text-center text-sm font-semibold capitalize transition-colors ${
+                activeTab === tab
+                  ? 'bg-[#21262d] text-white border-b-2 border-indigo-500'
+                  : 'text-gray-400 hover:text-gray-200'
               }`}
             >
               {tab}
@@ -121,38 +121,48 @@ const Experience = () => {
         </div>
 
         {/* Dynamic Content Display */}
-        <div className="p-6 md:p-8 bg-[#0a0a0a]/60">
+        <div className="p-4 sm:p-6 md:p-8 bg-[#0a0a0a]/60">
           {activeTab === 'skills' ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
               {skills.map((skill) => (
-                <div 
+                <div
                   key={skill}
-                  className="flex flex-col items-center justify-center p-6 bg-white/[0.02] border border-white/10 rounded-xl"
+                  className="flex flex-col items-center justify-center p-4 sm:p-6 bg-white/[0.02] border border-white/10 rounded-xl"
                 >
                   {skillIcons[skill] || <div className="w-8 h-8 bg-indigo-500/20 rounded-lg" />}
-                  <span className="mt-4 text-xs font-medium text-gray-300">
+                  <span className="mt-3 sm:mt-4 text-xs font-medium text-gray-300">
                     {skill}
                   </span>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="relative border-l border-white/10 ml-4 md:ml-6 pl-8 md:pl-10 space-y-10">
+            /*
+             * Timeline layout:
+             * - On mobile (default): reduced left margin/padding to avoid cramping
+             * - On md+: restored to original spacing
+             *
+             * Node positioning uses a shared left-offset calculation:
+             * ml-3 pl-7 on mobile  → node at -left-[44px]
+             * ml-4 pl-8 on sm      → node at -left-[48px]
+             * ml-6 pl-10 on md     → node at -left-[56px] (original)
+             */
+            <div className="relative border-l border-white/10 ml-3 sm:ml-4 md:ml-6 pl-7 sm:pl-8 md:pl-10 space-y-8 sm:space-y-10">
               {(activeTab === 'work' ? workExperiences : educationExperiences).map((item, idx) => (
                 <div key={idx} className="relative">
-                  
+
                   {/* Circular Timeline Node */}
-                  <div className="absolute -left-[53px] md:-left-[61px] top-0 w-10 h-10 rounded-full bg-indigo-500/20 border border-white/20 flex items-center justify-center overflow-hidden shadow-md z-10">
-                    <img src={item.logo} alt="Logo" className="w-6 h-6 object-contain" />
+                  <div className="absolute -left-[44px] sm:-left-[48px] md:-left-[56px] top-0 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-indigo-500/20 border border-white/20 flex items-center justify-center overflow-hidden shadow-md z-10">
+                    <img src={item.logo} alt="Logo" className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
                   </div>
 
-                  {/* Header Row */}
+                  {/* Header Row — stacks on mobile, inline on md+ */}
                   <div className="flex flex-col mb-1">
-                    <div className="flex items-baseline justify-between gap-4">
-                      <h3 className="text-xl font-bold text-white tracking-tight">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                      <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug">
                         {isWork(item) ? item.company : item.institution}
                       </h3>
-                      <span className="text-xs md:text-sm text-gray-500 font-medium whitespace-nowrap">
+                      <span className="text-xs text-gray-500 font-medium mt-0.5 sm:mt-0 sm:whitespace-nowrap">
                         {item.period}
                       </span>
                     </div>
@@ -162,7 +172,7 @@ const Experience = () => {
                   </div>
 
                   {/* Description */}
-                  <ul className="list-disc pl-4 mt-4 space-y-2.5">
+                  <ul className="list-disc pl-4 mt-3 sm:mt-4 space-y-2 sm:space-y-2.5">
                     {item.description.map((bullet, i) => (
                       <li key={i} className="text-gray-400 text-sm leading-relaxed marker:text-gray-600 pl-1">
                         {bullet}
@@ -172,7 +182,7 @@ const Experience = () => {
 
                   {/* Technologies */}
                   {item.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-4">
+                    <div className="flex flex-wrap gap-1.5 mt-3 sm:mt-4">
                       {item.technologies.map((tech) => (
                         <span key={tech} className="px-2 py-0.5 text-[11px] font-medium rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
                           {tech}
